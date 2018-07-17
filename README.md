@@ -16,6 +16,8 @@ Access **Manage External Modules** section of your project, and then click on CS
 
 In the configuration form, you can either create a global style for your project or define multiple styles for different contexts. Each context is defined by choosing a list of forms/instruments and/or limiting the scope to surveys or data entries.
 
-The configuration also provides an enable/disable flag for each one of your styles.
+The configuration form also provides an enable/disable switch for each one of your styles. Make sure to enable your styles.
+
+If more than one style is applied to the same page, the CSS rules are applied in the order of appearance in the configuration form.
 
 ![Configuration screen](img/config.png)
