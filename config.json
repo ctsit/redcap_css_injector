@@ -1,0 +1,77 @@
+{
+    "name": "REDCap CSS Injector",
+    "namespace": "CSSInjector\\ExternalModule",
+    "description": "Allow administrators to inject CSS into surveys and data entry forms. <strong><a href=\"https://github.com/ctsit/redcap_css_injector\">See full documentation here</a></strong>.",
+    "permissions": [
+        "redcap_data_entry_form_top",
+        "redcap_survey_page_top"
+    ],
+    "authors": [
+        {
+            "name": "Philip Chase",
+            "email": "pbc@ufl.edu",
+            "institution": "University of Florida - CTSI"
+        },
+        {
+            "name": "Taryn Stoffs",
+            "email": "tls@ufl.edu",
+            "institution": "University of Florida - CTSI"
+        },
+        {
+            "name": "Tiago Bember",
+            "email": "tbembersimeao@ufl.edu",
+            "institution": "University of Florida - CTSI"
+        }
+    ],
+    "project-settings": [
+        {
+            "name": "Styles",
+            "key": "styles",
+            "type": "sub_settings",
+            "repeatable": true,
+            "sub_settings": [
+                {
+                    "name": "Enabled",
+                    "key": "style_enabled",
+                    "type": "checkbox"
+                },
+                {
+                    "name": "Apply to",
+                    "key": "style_type",
+                    "type": "radio",
+                    "required": true,
+                    "choices": [
+                        {
+                            "value": "all",
+                            "name": "All"
+                        },
+                        {
+                            "value": "survey",
+                            "name": "Surveys"
+                        },
+                        {
+                            "value": "data_entry",
+                            "name": "Data entries"
+                        }
+                    ]
+                },
+                {
+                    "name": "Apply to the following forms (leave blank to apply to all forms)",
+                    "key": "style_forms",
+                    "type": "form-list",
+                    "repeatable": true,
+                    "select2": true
+                },
+                {
+                    "name": "CSS",
+                    "key": "style_code",
+                    "required": true,
+                    "type": "textarea"
+                }
+            ]
+        }
+    ],
+    "compatibility": {
+        "redcap-version-min": "8.4.3"
+    }
+}
