@@ -2,7 +2,7 @@
 Allows administrators to inject CSS into surveys and data entry forms.
 
 ## Prerequisites
-- REDCap >= 8.4.3
+- REDCap >= 8.0.3
 
 ## Easy Installation
 - Obtain this module from the Consortium [REDCap Repo](https://redcap.vanderbilt.edu/consortium/modules/index.php) from the Control Center.
