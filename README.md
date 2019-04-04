@@ -21,3 +21,11 @@ The configuration form also provides an enable/disable switch for each one of yo
 If more than one style is applied to the same page, the CSS rules are applied in the order of appearance in the configuration form.
 
 ![Configuration screen](img/config.png)
+
+## Sample CSS
+
+For CSS ideas you could try in CSS injector see the [sample CSS files](samples/). These files were tested against surveys in REDCap 8.7.0. Please verify they work as desired in your REDCap before using them in production. Each is dependent on REDCap's style names. As those style names can change over time, they probably won't hold value forever.
+
+## Writing CSS for the CSS Injector
+
+To learn how to craft your own CSS for use in REDCap CSS Injector, you'll need to use the developer tools for your web browser. Chrome supports the [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/).  Firefox supports [Firefox Developer Tools](https://developer.mozilla.org/en-US/docs/Tools).  Using one of these tools you can access a REDCap page and inspect an element of the page you want to change. The dev tools allow you to see what CSS controls an element's appearance. You can change the values you think might give you the effect you want and review the result in real time on that page.  Once you get the result you like, copy that CSS, trim it down to the part you care about, and test it in CSS inspector.
