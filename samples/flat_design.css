@@ -1,0 +1,94 @@
+body * {
+    font-family: 'Helvetica Neue', 'Helvetica', 'Arial',sans-serif !important;
+}
+
+body {
+    color: #6f6e6e;
+    background: rgb(53,47,59);
+    background: linear-gradient(0deg, rgba(53,47,59,1) 60%, rgba(57,89,114,1) 100%);
+    font-weight: unset;
+}
+
+.greenhighlight {
+    background-color: #ffffff !important; /* Disable highlighting of clicked sections */
+}
+
+#pagecontent {
+    background-color: #ffffff;
+}
+
+#surveytitlelogo,
+#surveyinstructions {
+    color: #ffffff;
+    background: rgb(221,74,100);
+    background: linear-gradient(18deg, rgba(221,74,100,1) 85%, rgba(236,127,71,1) 100%); /* set a sunburst gradient for the title region */
+    background-attachment: fixed; /* allow gradient to continue through div elements */
+    padding: 1px; /* eliminate blank space between div elements */
+    max-width: none; /* prevent surveytitlelogo from ending before the edge of the page */
+    font-weight: unset;
+}
+
+.labelrc {
+    background-color: #ffffff;
+    font-weight: unset;
+}
+
+/* circle question numbers */
+.labelrc questionnum {
+	  position: absolute;
+	  background-position: -256px 0;
+	  width: 30px;
+	  height: 30px;
+	  left: -15px;
+	  top: 44px;
+	  text-align: center;
+	  color: #fff;
+	  font-size: 15px;
+	  line-height: 30px;
+	  font-family: 'ProximaNova-Bold';
+	  font-weight: normal;
+	  text-indent: 0;
+}
+
+input[type='radio'] {
+    background-color: #c9cbcb;
+}
+
+select {
+    background: url("https://image.flaticon.com/icons/svg/137/137619.svg") no-repeat right #f8f8f8 !important;
+    /* overflow:hidden; */
+    /* width:115% /\* this percentage effectively extends the drop down button out of view *\/; */
+    /* background-color:transparent /\* this hides the select's background making any styling visible from the div *\/; */
+    /* background-image:none;  */
+    -moz-appearance: none;
+    -webkit-appearance: none /* this is required for Webkit browsers */;
+    appearance: none;
+    display: block;
+    border:none;
+    width: 10em;
+    box-shadow:none;
+    padding: 9px 0 9px 13px; /* padding should be added to the select, not the div */
+    font-family: 'ProximaNova-Regular', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    /* color: #939393; */
+}
+
+td.header.toolbar {
+    display: none;
+}
+
+.resetLinkParent {
+    visibility: hidden;
+}
+
+.requiredlabel {
+    display: none;
+}
+
+button {
+    font-weight: unset;
+}
+
+.header.toolbar {
+    font-weight: unset;
+}
