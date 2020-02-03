@@ -65,11 +65,11 @@ class ExternalModule extends AbstractExternalModule {
 
         if ($project_id) {
             $settings = $settings['project-settings'];
-            $values = ExternalModules::getProjectSettingsAsArray($this->PREFIX, $project_id);
+            $values = $this->getProjectSettings($project_id);
         }
         else {
             $settings = $settings['system-settings'];
-            $values = ExternalModules::getSystemSettingsAsArray($this->PREFIX);
+            $values = $this->getSystemSettings();
         }
 
         return $this->_getFormattedSettings($settings, $values);
