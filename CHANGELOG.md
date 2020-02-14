@@ -3,6 +3,14 @@ All notable changes to the REDCap CSS Injector module will be documented in this
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.1.1] - 2020-02-14
+### Changed
+- Add DOI to README.md (Philip Chase)
+- Update authors in config.json (Philip Chase)
+- Add AUTHORS file (Philip Chase)
+- use builtin method instead of referencing ExternalModules class (Kyle Chesney)
+
+
 ## [1.1.0] - 2019-09-23
 ### Added
 - Add flat/gradient stylized survey css example (Kyle Chesney)
