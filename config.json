@@ -1,11 +1,13 @@
 {
     "name": "REDCap CSS Injector",
     "namespace": "CSSInjector\\ExternalModule",
-    "description": "Allow administrators to inject CSS into surveys and data entry forms. <strong><a href=\"https://github.com/ctsit/redcap_css_injector\">See full documentation here</a></strong>.",
+    "description": "Allow administrators to inject CSS into surveys, data entry forms and other project pages. <strong><a href=\"https://github.com/ctsit/redcap_css_injector\">See full documentation here</a></strong>.",
     "permissions": [
         "redcap_data_entry_form_top",
-        "redcap_survey_page_top"
+        "redcap_survey_page_top",
+        "redcap_every_page_top"
     ],
+    "enable-every-page-hooks-on-system-pages": false,
     "authors": [
         {
             "name": "Philip Chase",
@@ -43,15 +45,23 @@
                     "choices": [
                         {
                             "value": "all",
-                            "name": "All"
+                            "name": "All project pages"
                         },
                         {
                             "value": "survey",
-                            "name": "Surveys"
+                            "name": "Surveys only"
                         },
                         {
                             "value": "data_entry",
-                            "name": "Data entries"
+                            "name": "Data entry forms only"
+                        },
+                        {
+                            "value": "both",
+                            "name": "Data entry and survey forms only"
+                        },
+                        {
+                            "value": "non",
+                            "name": "Non-data entry/survey pages"
                         }
                     ]
                 },
@@ -60,7 +70,23 @@
                     "key": "style_forms",
                     "type": "form-list",
                     "repeatable": true,
-                    "select2": true
+                    "branchingLogic": {
+                        "type": "or",
+                        "conditions": [
+                            {
+                                "field": "style_type",
+                                "value": "survey"
+                            },
+                            {
+                                "field": "style_type",
+                                "value": "data_entry"
+                            },
+                            {
+                                "field": "style_type",
+                                "value": "both"
+                            }
+                        ]
+                    }
                 },
                 {
                     "name": "CSS",

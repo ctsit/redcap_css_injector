@@ -17,17 +17,23 @@ class ExternalModule extends AbstractExternalModule {
     /**
      * @inheritdoc
      */
-    function redcap_data_entry_form_top($project_id, $record = null, $instrument, $event_id, $group_id = null, $repeat_instance = 1) {
-        $this->applyStyles('data_entry', $instrument);
+    public function redcap_every_page_top($project_id) {
+        $type = '';
+        $instrument = '';
+        if (strtolower(PAGE)==="dataentry/index.php" 
+                && isset($_GET['id']) && $_GET['id']!=='' 
+                && isset($_GET['page']) && $_GET['page']!=='') {
+            $type = 'data_entry';
+            $instrument = $_GET['page'];
+        } else if (strtolower(PAGE)==="surveys/index.php" 
+                && isset($_GET['id']) && $_GET['id']!=='' 
+                && isset($_GET['page']) && $_GET['page']!=='') {
+            $type = 'survey';
+            $instrument = $_GET['page'];
+        }
+        $this->applyStyles($type, $instrument);
     }
-
-    /**
-     * @inheritdoc
-     */
-    function redcap_survey_page_top($project_id, $record = null, $instrument, $event_id, $group_id = null, $survey_hash, $response_id = null, $repeat_instance = 1) {
-        $this->applyStyles('survey', $instrument);
-    }
-
+    
     /**
      * Apply CSS rules.
      *
@@ -44,12 +50,49 @@ class ExternalModule extends AbstractExternalModule {
         }
 
         foreach ($settings['styles'] as $row) {
-            if (!empty($row['style_enabled']) && in_array($row['style_type'], ['all', $type]) && (!array_filter($row['style_forms']) || in_array($form, $row['style_forms']))) {
+            if ($this->applyNow(
+                    $row['style_type'],(bool)$row['style_enabled'],$row['style_forms'],
+                    $type,$form )) {
                 echo '<style>' . strip_tags($row['style_code']) . '</style>';
             }
         }
     }
 
+    /**
+     * Determine whether style should be applied in the current context.
+     * @param string $style_type
+     *   Accepted types: 'data_entry', 'survey', 'both, 'non', 'all'.
+     * @param bool $enabled
+     *   Style enabled
+     * @param Array $style_forms
+     *   Array of form names that style should be applied to.
+     * @param string $this_type
+     *   Accepted types: 'data_entry', 'survey', 'both, 'non', 'all'.
+     * @param string $this_form
+     *   Name of current form, or empty if not data entry or survey.
+     * @return boolean 
+     *   Should the style be applied in the current context? true/false
+     */
+    function applyNow(string $style_type, bool $enabled, array $style_forms, string $this_type, string $this_form) {
+        $apply = false;
+        if (!$enabled) { 
+            $apply = false;
+        } else if ($style_type==='all') {
+            $apply = true;
+        } else if ($style_type==='non' && $this_form==='') {
+            $apply = true;
+        } else if (
+                    (!array_filter($style_forms) || in_array($this_form, $style_forms)) &&
+                    (
+                        $style_type==='both' || 
+                        (($style_type==='data_entry' || $style_type==='survey') && $style_type===$this_type)
+                    )
+                ) {
+            $apply = true;
+        }
+        return $apply;
+    }
+    
     /**
      * Formats settings into a hierarchical key-value pair array.
      *
