@@ -29,6 +29,13 @@ class ExternalModule extends AbstractExternalModule {
     }
 
     /**
+     * @inheritdoc
+     */
+    function redcap_survey_acknowledgement_page($project_id, $record = null, $instrument, $event_id, $group_id = null, $survey_hash, $response_id = null, $repeat_instance = 1) {
+        $this->applyStyles('survey', $instrument);
+    }
+
+    /**
      * Apply CSS rules.
      *
      * @param string $type
