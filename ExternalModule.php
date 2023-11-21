@@ -14,11 +14,30 @@ use ExternalModules\ExternalModules;
  */
 class ExternalModule extends AbstractExternalModule {
 
+    public function redcap_module_system_enable($version) {
+        $version;
+    }
+
     /**
      * @inheritdoc
      */
-    function redcap_data_entry_form_top($project_id, $record = null, $instrument, $event_id, $group_id = null, $repeat_instance = 1) {
-        $this->applyStyles('data_entry', $instrument);
+    public function redcap_every_page_top($project_id) {
+        $type = '';
+        $instrument = '';
+        if (strtolower(PAGE)==="dataentry/index.php" 
+                && isset($_GET['id']) && $_GET['id']!=='' 
+                && isset($_GET['page']) && $_GET['page']!=='') {
+            $type = 'data_entry';
+            $instrument = $_GET['page'];
+        } else if (strtolower(PAGE)==="surveys/index.php" 
+                && isset($_GET['id']) && $_GET['id']!=='' 
+                && isset($_GET['page']) && $_GET['page']!=='') {
+            $type = 'survey';
+            $instrument = $_GET['page'];
+        } else {
+            $type = "other";
+        }
+        $this->applyStyles($type, $instrument);
     }
 
     /**
@@ -44,9 +63,29 @@ class ExternalModule extends AbstractExternalModule {
         }
 
         foreach ($settings['styles'] as $row) {
+<<<<<<< Updated upstream
             if (!empty($row['style_enabled']) && in_array($row['style_type'], ['all', $type]) && (!array_filter($row['style_forms']) || in_array($form, $row['style_forms']))) {
+=======
+            if (!(bool)$row['style_enabled']) { continue; }
+
+            if (($type == 'other' && (bool)$this->getProjectSetting('other')[0])) {
+>>>>>>> Stashed changes
                 echo '<style>' . strip_tags($row['style_code']) . '</style>';
             }
+            else if (
+                (!(bool)array_filter($row['style_forms']) || in_array($form, $row['style_forms'])) &&
+                (
+                    ($type == 'data_entry' && (bool)$this->getProjectSetting('data_entry')[0]) ||
+                    ($type == 'survey' && (bool)$this->getProjectSetting('survey')[0])
+                )
+            ) {
+                echo '<style>' . strip_tags($row['style_code']) . '</style>';
+
+            }
+            // if ($row['style_type'] === )
+            // if ( $this->applyNow($row['style_type'], (bool)$row['style_enabled'], $row['style_forms'], $type, $form) ) {
+            //     echo '<style>' . strip_tags($row['style_code']) . '</style>';
+            // }
         }
     }
 

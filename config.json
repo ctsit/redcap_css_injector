@@ -4,7 +4,9 @@
     "description": "Allow administrators to inject CSS into surveys and data entry forms. <strong><a href=\"https://github.com/ctsit/redcap_css_injector\">See full documentation here</a></strong>.",
     "permissions": [
         "redcap_data_entry_form_top",
-        "redcap_survey_page_top"
+        "redcap_survey_page_top",
+        "redcap_module_system_enable",
+        "redcap_every_page_top"
     ],
     "authors": [
         {
@@ -36,24 +38,19 @@
                     "type": "checkbox"
                 },
                 {
-                    "name": "Apply to",
-                    "key": "style_type",
-                    "type": "radio",
-                    "required": true,
-                    "choices": [
-                        {
-                            "value": "all",
-                            "name": "All"
-                        },
-                        {
-                            "value": "survey",
-                            "name": "Surveys"
-                        },
-                        {
-                            "value": "data_entry",
-                            "name": "Data entries"
-                        }
-                    ]
+                    "name": "Apply to survey pages",
+                    "key": "survey",
+                    "type": "checkbox"
+                },
+                {
+                    "name": "Apply to data entry pages",
+                    "key": "data_entry",
+                    "type": "checkbox"
+                },
+                {
+                    "name": "Apply to all other project pages",
+                    "key": "other",
+                    "type": "checkbox"
                 },
                 {
                     "name": "Apply to the following forms (leave blank to apply to all forms)",
