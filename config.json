@@ -4,7 +4,8 @@
     "description": "Allow administrators to inject CSS into surveys and data entry forms. <strong><a href=\"https://github.com/ctsit/redcap_css_injector\">See full documentation here</a></strong>.",
     "permissions": [
         "redcap_data_entry_form_top",
-        "redcap_survey_page_top"
+        "redcap_survey_page_top",
+        "redcap_survey_acknowledgement_page"
     ],
     "authors": [
         {
