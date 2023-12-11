@@ -2,6 +2,10 @@
 All notable changes to the REDCap CSS Injector module will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.2] - 2023-12-11
+### Changed
+- Use null coalesce in _getFormattedSettings (@ChemiKyle)
+
 
 ## [1.1.1] - 2020-02-14
 ### Changed
