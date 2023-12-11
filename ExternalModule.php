@@ -90,6 +90,7 @@ class ExternalModule extends AbstractExternalModule {
             }
 
             if ($setting['type'] == 'sub_settings') {
+                $value = $value ?? [];
                 $deltas = array_keys($value);
                 $value = [];
 
