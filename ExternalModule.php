@@ -62,22 +62,18 @@ class ExternalModule extends AbstractExternalModule {
         foreach ($settings['styles'] as $row) {
             if (!(bool)$row['style_enabled']) { continue; }
 
-            if (($type == 'other' && (bool)$this->getProjectSetting('other')[0])) {
+            if ($type == 'other' && (bool)$row['other']) {
                 echo '<style>' . strip_tags($row['style_code']) . '</style>';
             }
             else if (
                 (!(bool)array_filter($row['style_forms']) || in_array($form, $row['style_forms'])) &&
                 (
-                    ($type == 'data_entry' && (bool)$this->getProjectSetting('data_entry')[0]) ||
-                    ($type == 'survey' && (bool)$this->getProjectSetting('survey')[0])
+                    ($type == 'data_entry' && (bool)$row['data_entry']) ||
+                    ($type == 'survey' && (bool)$row['survey'])
                 )
             ) {
                 echo '<style>' . strip_tags($row['style_code']) . '</style>';
             }
-            // if ($row['style_type'] === )
-            // if ( $this->applyNow($row['style_type'], (bool)$row['style_enabled'], $row['style_forms'], $type, $form) ) {
-            //     echo '<style>' . strip_tags($row['style_code']) . '</style>';
-            // }
         }
     }
 
@@ -92,15 +88,15 @@ class ExternalModule extends AbstractExternalModule {
      *   The formatted settings.
      */
     function getFormattedSettings($project_id = null) {
-        $settings = $this->getConfig();
+        $settings = $this->framework->getConfig();
 
         if ($project_id) {
             $settings = $settings['project-settings'];
-            $values = $this->getProjectSettings($project_id);
+            $values = $this->framework->getProjectSettings($project_id);
         }
         else {
             $settings = $settings['system-settings'];
-            $values = $this->getSystemSettings();
+            $values = $this->framework->getSystemSettings();
         }
 
         return $this->_getFormattedSettings($settings, $values);
@@ -121,18 +117,7 @@ class ExternalModule extends AbstractExternalModule {
             }
 
             if ($setting['type'] == 'sub_settings') {
-                $value = $value ?? [];
-                $deltas = array_keys($value);
-                $value = [];
-
-                foreach ($deltas as $delta) {
-                    $sub_deltas = array_merge($inherited_deltas, [$delta]);
-                    $value[$delta] = $this->_getFormattedSettings($setting['sub_settings'], $values, $sub_deltas);
-                }
-
-                if (empty($setting['repeatable'])) {
-                    $value = $value[0];
-                }
+                $value = $this->framework->getSubSettings($key);
             }
 
             $formatted[$key] = $value;

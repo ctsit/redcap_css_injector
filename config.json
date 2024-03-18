@@ -2,12 +2,7 @@
     "name": "REDCap CSS Injector",
     "namespace": "CSSInjector\\ExternalModule",
     "description": "Allow administrators to inject CSS into surveys and data entry forms. <strong><a href=\"https://github.com/ctsit/redcap_css_injector\">See full documentation here</a></strong>.",
-    "permissions": [
-        "redcap_data_entry_form_top",
-        "redcap_survey_page_top",
-        "redcap_module_system_enable",
-        "redcap_every_page_top"
-    ],
+    "framework-version": 15,
     "authors": [
         {
             "name": "University of Florida CTS-IT",
@@ -59,6 +54,6 @@
         }
     ],
     "compatibility": {
-        "redcap-version-min": "8.0.3"
+        "redcap-version-min": "14.0.2"
     }
 }
