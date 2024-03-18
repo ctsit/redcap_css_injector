@@ -14,14 +14,11 @@ use ExternalModules\ExternalModules;
  */
 class ExternalModule extends AbstractExternalModule {
 
-    public function redcap_module_system_enable($version) {
-        $version;
-    }
-
     /**
      * @inheritdoc
      */
     public function redcap_every_page_top($project_id) {
+        // Determine page type
         $type = '';
         $instrument = '';
         if (strtolower(PAGE)==="dataentry/index.php" 
@@ -63,13 +60,9 @@ class ExternalModule extends AbstractExternalModule {
         }
 
         foreach ($settings['styles'] as $row) {
-<<<<<<< Updated upstream
-            if (!empty($row['style_enabled']) && in_array($row['style_type'], ['all', $type]) && (!array_filter($row['style_forms']) || in_array($form, $row['style_forms']))) {
-=======
             if (!(bool)$row['style_enabled']) { continue; }
 
             if (($type == 'other' && (bool)$this->getProjectSetting('other')[0])) {
->>>>>>> Stashed changes
                 echo '<style>' . strip_tags($row['style_code']) . '</style>';
             }
             else if (
@@ -80,7 +73,6 @@ class ExternalModule extends AbstractExternalModule {
                 )
             ) {
                 echo '<style>' . strip_tags($row['style_code']) . '</style>';
-
             }
             // if ($row['style_type'] === )
             // if ( $this->applyNow($row['style_type'], (bool)$row['style_enabled'], $row['style_forms'], $type, $form) ) {
