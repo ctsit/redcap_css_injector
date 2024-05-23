@@ -39,6 +39,11 @@ If you are upgrading from a version prior to 2.0.0, you will need to reconfigure
 
 
 ```sql
+START TRANSACTION;
+
+CREATE UNIQUE INDEX redcap_external_module_settings_UK1
+on redcap_external_module_settings (external_module_id, project_id, `key`);
+
 INSERT INTO redcap_external_module_settings (external_module_id, project_id, `key`, type, value)
 SELECT 
     s.external_module_id,
@@ -87,6 +92,10 @@ GROUP BY
     s.external_module_id, 
     s.project_id, 
     k.`key`;
+
+DROP INDEX redcap_external_module_settings_UK1 on redcap_external_module_settings;
+
+COMMIT;
 ```
 
 > **Note:**
