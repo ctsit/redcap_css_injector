@@ -35,7 +35,7 @@ Configuration for version 2.0.0 and later has changed. The configuration form no
 
 ## Migration from version 1.X.X to 2.0.0
 
-If you are upgrading from a version prior to 2.0.0, you will need to reconfigure your styles. To make this easier, we have a mysql query that will help you migrate your current styles to the new configuration format. Your administrator will need to run this query on the REDCap database.
+If you are upgrading from a version prior to 2.0.0, you will need to reconfigure your styles. To make this easier, we have a MySQL query that will help you migrate your current styles to the new configuration format. Your administrator will need to run this query on the REDCap database.
 
 
 ```sql
@@ -99,13 +99,11 @@ COMMIT;
 ```
 
 > **Note:**
-This query requires mysql 8.0 or later.
+This query requires MySQL 8.0 or later. 
 
-The query should be run in PHPMyAdmin page of your REDCap instance. In PHPMyAdmin, select the REDCap Database, then find the redcap_external_module_settings table and click on the SQL tab of the table. Paste the above query in the text area and click on the Go button.
+If you run this query shortly before upgrading CSS Injector, the migrated settings will be in place for the module upgrade. The module will start working correctly immediately. You can run the script after the module upgrade, but the module will have no effect until you either run the settings migration script or set the _Apply to survey pages / data entry pages / other project pages_ checkboxes manually.
 
-After running the query, you should see a message saying that some rows were inserted.
-
-In the project home page go to the **External Module > Manage** and click on the REDCap CSS Injector configure button. You should see your styles migrated to the new configuration format.
+The query should be run in against the MySQL database of your REDCap instance. After running the query, you should see a message saying that some rows were inserted. The module will start working immediately. In the project home page go to the **External Module > Manage** and click on the REDCap CSS Injector configure button. You should see your styles migrated to the new configuration format.
 
 ## Sample CSS
 
