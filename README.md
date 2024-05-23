@@ -88,6 +88,9 @@ GROUP BY
     s.project_id, 
     k.`key`;
 ```
+> **Note:**
+This query requires mysql 8.0 or later.
+
 The query should be run in PHPMyAdmin page of your REDCap instance. In PHPMyAdmin, select the REDCap Database, then find the redcap_external_module_settings table and click on the SQL tab of the table. Paste the above query in the text area and click on the Go button.
 
 After running the query, you should see a message saying that some rows were inserted.
