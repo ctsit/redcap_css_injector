@@ -88,6 +88,7 @@ GROUP BY
     s.project_id, 
     k.`key`;
 ```
+
 > **Note:**
 This query requires mysql 8.0 or later.
 
