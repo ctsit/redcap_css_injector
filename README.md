@@ -1,5 +1,5 @@
 # REDCap CSS Injector
-Allows administrators to inject CSS into surveys and data entry forms.
+Allows administrators to inject CSS into survey pages, data entry pages, and every other project page.
 
 [![DOI](https://zenodo.org/badge/141312467.svg)](https://zenodo.org/badge/latestdoi/141312467)
 

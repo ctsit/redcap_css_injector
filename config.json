@@ -1,7 +1,7 @@
 {
     "name": "REDCap CSS Injector",
     "namespace": "CSSInjector\\ExternalModule",
-    "description": "Allow administrators to inject CSS into surveys and data entry forms. <strong><a href=\"https://github.com/ctsit/redcap_css_injector\">See full documentation here</a></strong>.",
+    "description": "Allows administrators to inject CSS into survey pages, data entry pages, and every other project page. <strong><a href=\"https://github.com/ctsit/redcap_css_injector\">See full documentation here</a></strong>.",
     "framework-version": 15,
     "authors": [
         {
