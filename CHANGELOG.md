@@ -2,6 +2,10 @@
 All notable changes to the REDCap CSS Injector module will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.1] - 2024-05-24
+### Changed
+- Update description in README and config.json (@pbchase)
+
 ## [2.0.0] - 2024-05-24
 ### Changed
 - Apply CSS to survey, data entry, and all via checkboxes (@ChemiKyle, @saipavan10-git, @pbchase, #11, #17)
