@@ -17,8 +17,24 @@ class ExternalModule extends AbstractExternalModule {
     /**
      * @inheritdoc
      */
-    function redcap_data_entry_form_top($project_id, $record = null, $instrument, $event_id, $group_id = null, $repeat_instance = 1) {
-        $this->applyStyles('data_entry', $instrument);
+    public function redcap_every_page_top($project_id) {
+        // Determine page type
+        $type = '';
+        $instrument = '';
+        if (strtolower(PAGE)==="dataentry/index.php" 
+                && isset($_GET['id']) && $_GET['id']!=='' 
+                && isset($_GET['page']) && $_GET['page']!=='') {
+            $type = 'data_entry';
+            $instrument = $_GET['page'];
+        } else if (strtolower(PAGE)==="surveys/index.php" 
+                && isset($_GET['id']) && $_GET['id']!=='' 
+                && isset($_GET['page']) && $_GET['page']!=='') {
+            $type = 'survey';
+            $instrument = $_GET['page'];
+        } else {
+            $type = "other";
+        }
+        $this->applyStyles($type, $instrument);
     }
 
     /**
@@ -44,7 +60,18 @@ class ExternalModule extends AbstractExternalModule {
         }
 
         foreach ($settings['styles'] as $row) {
-            if (!empty($row['style_enabled']) && in_array($row['style_type'], ['all', $type]) && (!array_filter($row['style_forms']) || in_array($form, $row['style_forms']))) {
+            if (!(bool)$row['style_enabled']) { continue; }
+
+            if ($type == 'other' && (bool)$row['other']) {
+                echo '<style>' . strip_tags($row['style_code']) . '</style>';
+            }
+            else if (
+                (!(bool)array_filter($row['style_forms']) || in_array($form, $row['style_forms'])) &&
+                (
+                    ($type == 'data_entry' && (bool)$row['data_entry']) ||
+                    ($type == 'survey' && (bool)$row['survey'])
+                )
+            ) {
                 echo '<style>' . strip_tags($row['style_code']) . '</style>';
             }
         }
@@ -61,15 +88,15 @@ class ExternalModule extends AbstractExternalModule {
      *   The formatted settings.
      */
     function getFormattedSettings($project_id = null) {
-        $settings = $this->getConfig();
+        $settings = $this->framework->getConfig();
 
         if ($project_id) {
             $settings = $settings['project-settings'];
-            $values = $this->getProjectSettings($project_id);
+            $values = $this->framework->getProjectSettings($project_id);
         }
         else {
             $settings = $settings['system-settings'];
-            $values = $this->getSystemSettings();
+            $values = $this->framework->getSystemSettings();
         }
 
         return $this->_getFormattedSettings($settings, $values);
@@ -90,18 +117,7 @@ class ExternalModule extends AbstractExternalModule {
             }
 
             if ($setting['type'] == 'sub_settings') {
-                $value = $value ?? [];
-                $deltas = array_keys($value);
-                $value = [];
-
-                foreach ($deltas as $delta) {
-                    $sub_deltas = array_merge($inherited_deltas, [$delta]);
-                    $value[$delta] = $this->_getFormattedSettings($setting['sub_settings'], $values, $sub_deltas);
-                }
-
-                if (empty($setting['repeatable'])) {
-                    $value = $value[0];
-                }
+                $value = $this->framework->getSubSettings($key);
             }
 
             $formatted[$key] = $value;

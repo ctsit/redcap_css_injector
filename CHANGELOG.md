@@ -2,6 +2,11 @@
 All notable changes to the REDCap CSS Injector module will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.0] - 2024-05-24
+### Changed
+- Apply CSS to survey, data entry, and all via checkboxes (@ChemiKyle, @saipavan10-git, @pbchase, #11, #17)
+- Bump framework version to 15 replace recursive logic in _getFormattedSettings with getSubSettings (@ChemiKyle, #16, #17)
+
 ## [1.1.2] - 2023-12-11
 ### Changed
 - Use null coalesce in _getFormattedSettings (@ChemiKyle)
